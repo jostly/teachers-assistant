@@ -1,0 +1,82 @@
+
+#status {
+  text-shadow:0px 0px 5px rgba(0,0,0,1);
+  font-weight:bold;
+  color:#FFFFFF;
+  letter-spacing:1pt;
+  word-spacing:3pt;
+  font-size:28px;
+  text-align:center;
+  font-family:tahoma, verdana, arial, sans-serif;
+  line-height:1;
+  margin-bottom: 10px;
+}
+
+#status.buildError {
+  font-size: 36px;
+}
+
+#time {
+  text-shadow:0px 0px 1px rgba(0,0,0,1);
+  font-weight:bold;
+  color:#FFFFFF;
+  letter-spacing:1pt;
+  word-spacing:3pt;
+  font-size:18px;
+  text-align:center;
+  font-family:tahoma, verdana, arial, sans-serif;
+  line-height:1;
+  margin-bottom: 10px;
+}
+
+#failed {
+  text-shadow:0px 0px 1px rgba(0,0,0,1);
+  font-weight:normal;
+  color:#FFFFFF;
+  letter-spacing:1pt;
+  word-spacing:3pt;
+  font-size:18px;
+  text-align:center;
+  font-family:tahoma, verdana, arial, sans-serif;
+  line-height:1;
+}
+
+
+.entry {
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom:5px;
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+  background-color: #F72222;
+}
+
+.new {
+  background-color: #FF7771;
+}
+
+.header {
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.className {
+  font-size: 10px;
+  margin-bottom: 2px;
+}
+
+.testName {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+}
+
+.testName.new:before {
+  content: '⚠ ';
+  font-size: 22px;
+  color: yellow;
+}
+
+.body {
+  font-size: 16px;
+  padding: 5px;
+}

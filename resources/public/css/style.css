@@ -1,0 +1,21 @@
+body {
+  background-color: #C39C48 ;
+  text-shadow:0px 0px 1px rgba(0,0,0,1);
+  font-weight:bold;
+  color:#FFFFFF;
+  letter-spacing:1pt;
+  word-spacing:3pt;
+  font-size:24px;
+  text-align:center;
+  font-family:tahoma, verdana, arial, sans-serif;
+  line-height:1;
+}
+
+a:link, a:visited {
+  color:#FFFFFF;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #dddddd;
+}

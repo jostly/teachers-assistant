@@ -1,0 +1,4 @@
+{ :project-dir "../../gradle/tdd",
+  :build-system :autodetect,
+  :assistant true,
+  :file-server true }
