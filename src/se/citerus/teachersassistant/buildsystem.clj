@@ -1,12 +1,14 @@
 (ns se.citerus.teachersassistant.buildsystem
   (:use se.citerus.teachersassistant.filehelper
+        se.citerus.teachersassistant.config
         se.citerus.teachersassistant.resultparser))
 
 (import '(org.gradle.tooling GradleConnector BuildException)
         '(java.io ByteArrayOutputStream))
 
 (def test-report-key "There were failing tests. See the report at: ")
-(def test-report-dir "build/test-results")
+(def test-report-dir (:test-report-dir config))
+(def test-report-filter (:test-report-filter config))
 (def build-state (atom '()))
 
 (defn- gradle-connection [path]
@@ -31,20 +33,20 @@
       (failed-tests? (.getCause e)))))
 
 (defn- test-path [projectPath]
-  (.resolve projectPath "build/test-results"))
+  (.resolve projectPath test-report-dir))
 
 (defn- build-path [projectPath]
   "Launch a gradle build in the specified directory"
-  (delete-files (test-path projectPath) "TEST-*")
+  (delete-files (test-path projectPath) test-report-filter)
   (let [connection (gradle-connection projectPath)]
     (try
-      (.run (gradle-launcher connection "test"))
+      (.run (gradle-launcher connection (:test-task config)))
       { :build :complete,
-        :tests (flatten (do-each-file parse-junit (test-path projectPath) "TEST-*")) }
+        :tests (flatten (do-each-file parse-junit (test-path projectPath) test-report-filter)) }
       (catch Exception e
         (if (failed-tests? e)
           { :build :complete,
-            :tests (flatten (do-each-file parse-junit (test-path projectPath) "TEST-*")) }
+            :tests (flatten (do-each-file parse-junit (test-path projectPath) test-report-filter)) }
           { :build :failed }))
       (finally (.close connection))
       )))

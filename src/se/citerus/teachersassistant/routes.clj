@@ -1,6 +1,7 @@
 (ns se.citerus.teachersassistant.routes
   (:use compojure.core
         se.citerus.teachersassistant.views
+        se.citerus.teachersassistant.config
         se.citerus.teachersassistant.buildsystem
         se.citerus.teachersassistant.filehelper)
   (:require [liberator.core :refer [resource defresource]]
@@ -8,9 +9,6 @@
             [compojure.handler :as handler]
             [compojure.response :as response]
             [clojure.edn :as edn]))
-
-(def config
-  (edn/read-string (slurp "config.edn")))
 
 (defn build-watch [dir]
   (println "*** Project dir is " dir " ***")

@@ -9,11 +9,8 @@
 
 (defn do-each-file [func path file-pattern]
   "Calls func on each file in path matching file-pattern"
-  (let [dir-stream (Files/newDirectoryStream path file-pattern)]
-    (try
-      (doall (map func dir-stream)) ; Force evaluation so we can close dir-stream
-      (finally
-       (.close dir-stream)))))
+  (with-open [dir-stream (Files/newDirectoryStream path file-pattern)]
+    (doall (map func dir-stream)))) ; Force evaluation so we can close dir-stream
 
 (defn delete-file [path]
   (Files/delete path))
@@ -34,16 +31,12 @@
 
 (defn- register [watch path]
   (.register path watch watch-events watch-modifiers)
-  (let [dir-stream (Files/newDirectoryStream path)]
-    (try
-      (doall (map #(register watch %) (filter directory? dir-stream))) ; Force evaluation so we can close dir-stream
-      (finally
-       (.close dir-stream)))))
+  (with-open [dir-stream (Files/newDirectoryStream path)]
+    (doall (map #(register watch %) (filter directory? dir-stream)))))
 
 (defn watch-path [path]
-  (let [watch (.. path getFileSystem newWatchService)]
+  (with-open [watch (.. path getFileSystem newWatchService)]
     (register watch path)
-    (.take watch)
-    (.close watch)))
+    (.take watch)))
 
 (defn watch [dir] (watch-path (get-path dir)))

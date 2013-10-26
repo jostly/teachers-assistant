@@ -1,4 +1,7 @@
 { :project-dir "../../gradle/tdd",
+  :test-report-dir "build/test-results",
+  :test-report-filter "TEST-*",
+  :test-task "test",
   :build-system :autodetect,
   :assistant true,
   :file-server true }

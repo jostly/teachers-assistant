@@ -13,4 +13,4 @@
         tests (filter #(= :testcase (:tag %)) (:content c))]
     (map #(assoc (:attrs %1) :failure (parse-failure (:content %1))) tests)))
 
-;(parse-junit (get-path "TEST-failed-junit-example.xml"))
+
