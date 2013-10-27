@@ -21,7 +21,7 @@
 (defn index-page []
   (html5
    [:head
-    [:title "Teacher's Pet"]
+    [:title "Teacher's Assistant"]
     (include-css "/css/style.css")
     ]
    [:body
