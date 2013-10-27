@@ -52,4 +52,11 @@
   (route/not-found "Page not found"))
 
 (defn boot []
-  (.start (Thread. #(build-watch (:project-dir config)))))
+  ; validate settings
+  (if (.exists (clojure.java.io/file (:project-dir config) "build.gradle"))
+
+    (.start (Thread. #(build-watch (:project-dir config))))
+
+    (throw (RuntimeException.
+            (format "There is no gradle build file in %s"
+                    (:project-dir config))))))
