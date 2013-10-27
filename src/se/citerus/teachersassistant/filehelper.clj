@@ -1,7 +1,9 @@
 (ns se.citerus.teachersassistant.filehelper
+  (:use se.citerus.teachersassistant.config)
   (:import [java.nio.file Paths Files LinkOption WatchEvent$Kind WatchEvent$Modifier StandardWatchEventKinds]
-           [com.sun.nio.file SensitivityWatchEventModifier]))
-
+           [com.sun.nio.file SensitivityWatchEventModifier]
+           [java.io File]
+           [org.zeroturnaround.zip ZipUtil]))
 
 (defn get-path [^String dir & dirs]
   "Join a sequence of strings into a java.nio.Path"
@@ -40,3 +42,10 @@
     (.take watch)))
 
 (defn watch [dir] (watch-path (get-path dir)))
+
+(defn zip-dir [dir]
+  (let [zip-file (File/createTempFile "t-a" ".zip")]
+    (ZipUtil/pack (clojure.java.io/file dir)
+                  zip-file)
+
+    zip-file))

@@ -31,11 +31,23 @@
   :handle-ok (fn [ctx] (browse-page (get-in ctx [:request :params :*])))
   )
 
+(defn- zip-file-name []
+  (str (:project-name config)
+       "-"
+       (.format (java.text.SimpleDateFormat. "yyyy-MM-dd_HHmmss") (java.util.Date.))
+       ".zip"))
+
 (defroutes app
   (GET "/" [] (index-page))
   (GET "/assistant" [] (assistant-page))
   (GET "/build" [] build-resource)
   (GET "/browse/*" [] browse-resource)
+  (GET "/download" []
+       (let [zip-file (zip-dir (:project-dir config))]
+         {:headers
+          {"Content-Disposition"
+           (str "attachment; filename=" (zip-file-name))}
+         :body zip-file }))
   (route/resources "/")
   (route/not-found "Page not found"))
 

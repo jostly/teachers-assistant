@@ -2,6 +2,7 @@
   :description "Teacher's Pet"
   :repositories [["releases" "http://repo.gradle.org/gradle/libs-releases-local"]]
   :dependencies [[org.clojure/clojure "1.5.1"]
+                 [org.zeroturnaround/zt-zip "1.6"]
                  [org.gradle/gradle-tooling-api "1.8"]
                  [org.slf4j/slf4j-simple "1.7.2"]
                  [compojure "1.1.3"]

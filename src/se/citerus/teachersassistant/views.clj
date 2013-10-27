@@ -38,6 +38,10 @@
     [:div
      [:a {:href "/browse/"} "Browse"]
      ]
+    [:br]
+    [:div
+     [:a {:href "/download"} "Download zip"]
+     ]
     ]))
 
 (defn- project-path [path]

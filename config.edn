@@ -1,4 +1,5 @@
 { :project-dir "../../gradle/tdd",
+  :project-name "tdd-example",
   :test-report-dir "build/test-results",
   :test-report-filter "TEST-*",
   :test-task "test",
