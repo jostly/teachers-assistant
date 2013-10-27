@@ -1,5 +1,5 @@
-(defproject teachers-pet "0.1.0"
-  :description "Teacher's Pet"
+(defproject teachers-assistant "0.9.0"
+  :description "Teacher's Assistant"
   :repositories [["releases" "http://repo.gradle.org/gradle/libs-releases-local"]]
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.zeroturnaround/zt-zip "1.6"]
