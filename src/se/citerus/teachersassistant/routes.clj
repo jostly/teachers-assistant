@@ -53,10 +53,13 @@
 
 (defn boot []
   ; validate settings
-  (if (.exists (clojure.java.io/file (:project-dir config) "build.gradle"))
-
-    (.start (Thread. #(build-watch (:project-dir config))))
-
+  (if (not (.exists (clojure.java.io/file (:project-dir config) "build.gradle")))
     (throw (RuntimeException.
             (format "There is no gradle build file in %s"
-                    (:project-dir config))))))
+                    (:project-dir config)))))
+  (if (not (.exists (clojure.java.io/file (:project-dir config) (:test-report-dir config))))
+    (throw (RuntimeException.
+            (format "There is no test report dir %s"
+                    (:test-report-dir config)))))
+  ; start the builder
+  (.start (Thread. #(build-watch (:project-dir config)))))
